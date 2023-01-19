@@ -3,7 +3,7 @@ import { useCountries } from '../../hooks/useCountries.js';
 import Card from '../Card/Card.js';
 
 export default function Display() {
-  const countries = useCountries();
+  const { countries, error } = useCountries();
   const [continent, setContinents] = useState('all');
   const continents = [...new Set(countries.map(({ continent }) => continent))];
 
@@ -19,6 +19,7 @@ export default function Display() {
           <option key={continent} value={continent}>{continent}</option>
         ))}
       </select>
+      <p style={{ color: 'purple' }}>{error}</p>
       {filtered.map((country) => (
         <Card key={country.id} {...country} />
       ))}
